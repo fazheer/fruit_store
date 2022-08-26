@@ -28,4 +28,7 @@ public interface FruitMapper {
     @Insert("insert into fruit (fruit_name, fruit_price, sale_unit) VALUE (#{fruitName},#{fruitPrice},#{saleUnit})")
     void insert(Fruit fruit);
 
+//    @Select("select *from fruit where fruit_price like CONCAT('%',#{fruitName},'%') ")
+    List<Fruit> selectByFruitName(String fruitName);
+
 }

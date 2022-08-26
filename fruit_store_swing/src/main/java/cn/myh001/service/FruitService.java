@@ -5,6 +5,7 @@ import cn.myh001.pojo.Fruit;
 import cn.myh001.util.SqlSessionFactoryUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -50,5 +51,13 @@ public class FruitService {
         sqlSession.commit();
         sqlSession.close();
 
+    }
+
+    public List<Fruit> selectByName(String fruitName) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        FruitMapper mapper = sqlSession.getMapper(FruitMapper.class);
+        List<Fruit> fruits = mapper.selectByFruitName(fruitName);
+        sqlSession.close();
+        return fruits;
     }
 }

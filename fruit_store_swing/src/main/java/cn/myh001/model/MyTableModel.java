@@ -25,7 +25,10 @@ public class MyTableModel extends AbstractTableModel {
 
 
     public MyTableModel() {
-        dataInit();
+        dataInit(this.fruits);
+    }
+    public MyTableModel(List<Fruit> fruits) {
+        dataInit(fruits);
     }
 
 
@@ -54,7 +57,7 @@ public class MyTableModel extends AbstractTableModel {
         return false;
     }
 
-    public void dataInit() {
+    public void dataInit(List<Fruit> fruits) {
 
         for (Fruit fruit : fruits) {
             Integer id = fruit.getId();

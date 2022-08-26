@@ -20,7 +20,7 @@ public class TableMouseListener extends MouseAdapter {
             int rowIndex = table.rowAtPoint(e.getPoint());
             table.setRowSelectionInterval(rowIndex, rowIndex);
             fruitId = (int) table.getModel().getValueAt(rowIndex, 0);
-            System.out.println(fruitId);
+
         }
     }
 }

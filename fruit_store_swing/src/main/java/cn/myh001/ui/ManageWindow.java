@@ -1,6 +1,7 @@
 package cn.myh001.ui;
 
 import cn.myh001.component.AddFruitDialog;
+import cn.myh001.component.SelectFruitDialog;
 import cn.myh001.component.UpdateFruitDialog;
 import cn.myh001.component.UpdatePasswordDialog;
 import cn.myh001.listener.TableMouseListener;
@@ -31,6 +32,8 @@ public class ManageWindow extends JFrame{
     JPanel topPanel;
     JLabel welcomeText;
     JLabel tableTitle;
+    JTextField selectNameFiled;
+    JButton searchBtn;
     JButton addFruitBtn;
     JButton refreshBtn;
     JMenuItem updateFruitBtn;
@@ -50,7 +53,7 @@ public class ManageWindow extends JFrame{
         this.addListener();
         this.setBounds(
                 (ScreenUtils.getScreenWidth() - WIDTH) / 2,
-                (ScreenUtils.getScreenHeight() - HEIGHT) / 2,
+                (ScreenUtils.getScreenHeight() - HEIGHT) / 4,
                 WIDTH,
                 HEIGHT
         );
@@ -76,6 +79,11 @@ public class ManageWindow extends JFrame{
         addFruitBtn = new JButton("新增");
         //刷新按钮，点击后刷新表格内容
         refreshBtn = new JButton("刷新");
+
+        selectNameFiled = new JTextField(15);
+
+        searchBtn = new JButton(new ImageIcon("D:\\Java_Project\\fruit_store_swing\\images\\searchIcon.png"));
+
         //欢迎
         welcomeText = new JLabel(username + "欢迎您！");
         //点击后返回登录界面
@@ -86,7 +94,10 @@ public class ManageWindow extends JFrame{
         topPanel.add(addFruitBtn);
         topPanel.add(refreshBtn);
         //间隔
-        topPanel.add(Box.createHorizontalStrut(WIDTH - 480));
+        topPanel.add(Box.createHorizontalStrut(300));
+        topPanel.add(selectNameFiled);
+        topPanel.add(searchBtn);
+        topPanel.add(Box.createHorizontalStrut(300));
         topPanel.add(welcomeText);
         topPanel.add(exitBtn);
         topPanel.add(updateAdminBtn);
@@ -110,14 +121,15 @@ public class ManageWindow extends JFrame{
     }
     public void addComponent() {
 
-        this.add(topPanel,BorderLayout.NORTH);
+       this.add(topPanel,BorderLayout.NORTH);
        Box tableBox = Box.createVerticalBox();
        Box titleBox = Box.createHorizontalBox();
        titleBox.add(tableTitle);
+       tableBox.add(Box.createVerticalStrut(30));
        tableBox.add(titleBox);
        tableBox.add(Box.createVerticalStrut(50));
        tableBox.add(tablePanel);
-        this.add(tableBox);
+       this.add(tableBox);
     }
     public void addListener() {
 
@@ -149,6 +161,12 @@ public class ManageWindow extends JFrame{
             freshTable();
         });
         table.addMouseListener(new TableMouseListener(table, updateFruitMenu));
+
+        searchBtn.addActionListener(e->{
+            String inputText = selectNameFiled.getText().trim();
+            new SelectFruitDialog(this,inputText);
+            freshTable();
+        });
     }
 
     public void freshTable() {

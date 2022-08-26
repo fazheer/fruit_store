@@ -8,5 +8,8 @@
         <result column="fruit_price" property="fruitPrice"/>
         <result column="sale_unit" property="saleUnit"/>
     </resultMap>
+    <select id="selectByFruitName" resultMap="fruitResultMap">
+        select *from fruit where fruit_name like concat('%',#{fruitName},'%')
+    </select>
 
 </mapper>
